@@ -1,11 +1,14 @@
+
 from flask import Flask, request, render_template, redirect, g
 import sqlite3
+import os
 
 app = Flask(__name__)
 
 # Veritabanı konfigürasyonu
-DATABASE = 'database.db'
-app.config['DATABASE'] = DATABASE
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "database.db")
+app.config['DATABASE'] = db_path
 
 # SQLite veritabanı bağlantısını açma fonksiyonu
 def get_db():

@@ -26,6 +26,19 @@ def close_db(error):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    cursor = get_db().cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS user (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT,
+                password TEXT,
+                host TEXT,
+                user TEXT,
+                user_agent TEXT
+            )
+        ''')
+        get_db().commit()
+    
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
